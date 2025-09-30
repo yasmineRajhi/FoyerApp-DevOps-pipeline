@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: foyer-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: foyer-app
+  template:
+    metadata:
+      labels:
+        app: foyer-app
+    spec:
+      containers:
+        - name: foyer-app
+          image: yasminerajhi/foyer-project:1.0.0
+          ports:
+            - containerPort: 8080
