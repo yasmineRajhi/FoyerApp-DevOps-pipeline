@@ -5,18 +5,18 @@ pipeline {
         maven 'mvn'
     }
     environment {
-        DOCKER_IMAGE = "yasmine/foyer-project:1.0.0"
-        NEXUS_URL = "http://192.167.33.10:8087"
+        DOCKER_IMAGE = "yasminerajhi/foyer-project:1.0.0"
+        NEXUS_URL = "http://192.168.186.131:8081/"
         NEXUS_REPO = "maven-releases"
         SONARQUBE_LOGIN = "admin"
-        SONARQUBE_PASSWORD = "Admin123456-"
+        SONARQUBE_PASSWORD = "@dM1n1234567"
     }
     stages {
 
         stage('GIT') {
             steps {
                 git branch: 'master',
-                    url: 'https://github.com/YasmineRajhi/foyer-project.git'
+                    url: 'https://github.com/yasmineRajhi/FoyerApp-DevOps-pipeline'
             }
         }
 
@@ -65,7 +65,7 @@ pipeline {
             steps {
                 script {
                     def imageExists = sh(
-                        script: "curl -s -o /dev/null -w \"%{http_code}\" https://hub.docker.com/v2/repositories/yasmine/foyer-project/tags/1.0.0/",
+                        script: "curl -s -o /dev/null -w \"%{http_code}\" https://hub.docker.com/v2/repositories/yasminerajhi/foyer-project/tags/1.0.0/",
                         returnStdout: true
                     ).trim()
 
@@ -85,7 +85,6 @@ pipeline {
             steps {
                 script {
                     echo "Trigger ArgoCD sync for deployment..."
-                    // Assuming you have argocd CLI installed on agent and configured
                     sh "argocd app sync foyer-project-app"
                 }
             }
