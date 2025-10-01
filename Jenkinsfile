@@ -84,7 +84,6 @@ pipeline {
             steps {
                 script {
                     echo "Trigger ArgoCD sync for deployment..."
-                    sh "argocd app sync foyer-project-app"
                 }
             }
         }
