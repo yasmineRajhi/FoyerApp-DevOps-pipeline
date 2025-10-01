@@ -8,8 +8,7 @@ pipeline {
         DOCKER_IMAGE = "yasminerajhi/foyer-project:1.0.0"
         NEXUS_URL = "http://192.168.186.131:8081/"
         NEXUS_REPO = "maven-releases"
-        SONARQUBE_LOGIN = "admin"
-        SONARQUBE_PASSWORD = "@dM1n1234567"
+        SONARQUBE_TOKEN = "squ_7245c8d0983de2f9a9f8d1316ce1e791d3b44816"
     }
     stages {
 
@@ -34,7 +33,7 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                sh "mvn sonar:sonar -Dsonar.login=${SONARQUBE_LOGIN} -Dsonar.password=${SONARQUBE_PASSWORD} -Dmaven.test.skip=true"
+                sh "mvn sonar:sonar -Dsonar.login=${SONARQUBE_TOKEN} -Dmaven.test.skip=true"
             }
         }
 
